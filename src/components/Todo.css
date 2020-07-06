@@ -6,3 +6,8 @@
 .incomplete {
     cursor: pointer;
 }
+
+body {
+    background-color: darkslateblue;
+    color: white;
+}

@@ -1,9 +1,11 @@
 import React from 'react'
 import './Todo.css'
 
-const Todo = props => {
-    const cName = props.task.completed ? 'completed' : 'incomplete'
-    return <li onClick={() => props.toggleCompleted(props.task)} className={cName}>{props.task.task}</li>
+class Todo extends React.Component {
+    render() {
+        const cName = this.props.task.completed ? 'completed' : 'incomplete'
+        return <li onClick={() => this.props.toggleCompleted(this.props.task)} className={cName}>{this.props.task.task}</li>
+    }
 }
 
 export default Todo
