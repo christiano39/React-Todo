@@ -34,10 +34,22 @@ class App extends React.Component {
   }
 
   toggleCompleted = (item) => {
-    const copyOfList = [...this.state.todoList]
-    const i = copyOfList.findIndex((obj => obj.id === item.id))
-    copyOfList[i].completed ? copyOfList[i].completed = false : copyOfList[i].completed = true
-    this.setState({ todoList: [...copyOfList] })
+    // const copyOfList = [...this.state.todoList]
+    // const i = copyOfList.findIndex((obj => obj.id === item.id))
+    // copyOfList[i].completed ? copyOfList[i].completed = false : copyOfList[i].completed = true
+    // this.setState({ todoList: [...copyOfList] })
+    this.setState({
+      todoList: this.state.todoList.map(itm => {
+        if (itm.id === item.id) {
+          return {
+            ...itm,
+            completed: !itm.completed,
+          };
+        } else {
+          return itm;
+        }
+      })
+    });
   }
 
   onClearCompleted = () => {
