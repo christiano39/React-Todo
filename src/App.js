@@ -41,7 +41,8 @@ class App extends React.Component {
   }
 
   onClearCompleted = () => {
-    
+    const incompleteTasks = this.state.todoList.filter(item => !item.completed)
+    this.setState({ todoList: [...incompleteTasks] })
   }
 
   render() {
