@@ -1,11 +1,12 @@
 import React from 'react'
+import Todo from './Todo'
 
 const TodoList = props => {
-    const { todoList } = props
+    const { todoList, toggleCompleted } = props
     return (
         <ul>
             {
-                todoList.map(item => <li>{item.task}</li>)
+                todoList.map(item => <Todo key={item.id} task={item} toggleCompleted={toggleCompleted} />)
             }
         </ul>
     )

@@ -1,6 +1,7 @@
 import React from 'react';
 import TodoForm from './components/TodoForm'
 import TodoList from './components/TodoList'
+import { v4 as uuid } from 'uuid'
 
 class App extends React.Component {
   // you will need a place to store your state in this component.
@@ -19,12 +20,36 @@ class App extends React.Component {
     this.setState({ currentTodo: value })
   }
 
+  onAddTodo = () => {
+    if (this.state.currentTodo){
+      const newTask = {
+        id: uuid(),
+        task: this.state.currentTodo,
+        completed: false,
+      }
+
+      this.setState({ todoList: [...this.state.todoList, newTask] })
+      this.setState({ currentTodo: '' })
+    }
+  }
+
+  toggleCompleted = (item) => {
+    const copyOfList = [...this.state.todoList]
+    const i = copyOfList.findIndex((obj => obj.id === item.id))
+    copyOfList[i].completed ? copyOfList[i].completed = false : copyOfList[i].completed = true
+    this.setState({ todoList: [...copyOfList] })
+  }
+
+  onClearCompleted = () => {
+    
+  }
+
   render() {
     return (
       <div>
         <h2>Welcome to your Todo App!</h2>
-        <TodoList todoList={this.state.todoList}/>
-        <TodoForm onInputChange={this.onInputChange} />
+        <TodoList todoList={this.state.todoList} toggleCompleted={this.toggleCompleted} />
+        <TodoForm onInputChange={this.onInputChange} onAddTodo={this.onAddTodo} onClearCompleted={this.onClearCompleted} currentTodo={this.state.currentTodo} />
       </div>
     );
   }
