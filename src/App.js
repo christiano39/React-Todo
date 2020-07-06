@@ -20,7 +20,8 @@ class App extends React.Component {
     this.setState({ currentTodo: value })
   }
 
-  onAddTodo = () => {
+  onAddTodo = e => {
+    e.preventDefault();
     if (this.state.currentTodo){
       const newTask = {
         id: uuid(),
@@ -34,10 +35,6 @@ class App extends React.Component {
   }
 
   toggleCompleted = (item) => {
-    // const copyOfList = [...this.state.todoList]
-    // const i = copyOfList.findIndex((obj => obj.id === item.id))
-    // copyOfList[i].completed ? copyOfList[i].completed = false : copyOfList[i].completed = true
-    // this.setState({ todoList: [...copyOfList] })
     this.setState({
       todoList: this.state.todoList.map(itm => {
         if (itm.id === item.id) {
